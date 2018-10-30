@@ -103,7 +103,7 @@ h1, h2, h3, h4, h5, h6{
 
 .block-image {
 	position: relative;
-	z-index: -1;
+	z-index: 0;
 }
 
 
@@ -367,6 +367,10 @@ video {
 #services h1, #services h2{
 	color: white;
 }
+#about-me h1, #about-me h2{
+	color: white;
+}
+
 .service i {
     font-size: 60px;
 }
