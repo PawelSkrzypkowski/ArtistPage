@@ -3,7 +3,7 @@
 <!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
 <!--[if IE 9]><html class="ie ie9 lte9" lang="en-US"><![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
-<html class="noIE" lang="en-US">
+<html class="noIE" lang="en-US" xmlns:th="http://www.thymeleaf.org">
 <!--<![endif]-->
 	<head>
 		<title>Flusk</title>
@@ -24,6 +24,8 @@
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 		<link rel="stylesheet" href="assets/css/style.css" media="screen"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css"/>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -79,23 +81,26 @@
 		</div><!-- #drawer-right -->
 
 		<div id="wrapper">
-			
-			<div id="header" class="content-block header-wrapper">
+			<video autoplay muted loop>
+				<source src="http://thenewcode.com/assets/videos/polina.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>
+			<div id="header" class="content-block">
 				<div class="header-wrapper-inner">
 					<section class="top clearfix">
 						<div class="pull-left">
-							<h1><a class="logo" href="index.html">Flusk</a></h1>
+							<h1><a class="logo" href="index.html">Flusk</a>
+								<div class="pull-right"></div>
+								<a href="https://facebook.com"><img th:src="@{/assets/images/logo/facebook.png}" alt="logo facebook"/></a>
+								<a href="https://facebook.com"><img th:src="@{/assets/images/logo/instagram.png}" alt="logo instagram"/></a>
+							</h1>
 						</div>
 						<div class="pull-right">
+							<select class="selectpicker" data-width="fit">
+								<option data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
+								<option data-content='<span class="flag-icon flag-icon-pl"></span> Polski' selected>Polski</option>
+							</select>
 							<a class="toggleDrawer" href="#"><i class="fa fa-bars fa-2x"></i></a>
-						</div>
-					</section>
-					<section class="center">
-						<div class="slogan">
-							SLIM &amp; STYLISH
-						</div>
-						<div class="secondary-slogan">
-							The Flusk Theme By ThemeWagon.
 						</div>
 					</section>
 					<section class="bottom">
@@ -106,7 +111,41 @@
 				</div>
 			</div><!-- header -->
 
-			
+			<div class="content-block parallax" id="about-me"><!-- ABOUT ME -->
+				<div class="container text-center">
+					<header class="block-heading cleafix">
+						<h1>Our Services</h1>
+						<p>A little about what we do</p>
+					</header>
+					<section class="block-body">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="service">
+									<i class="fa fa-send-o"></i>
+									<h2>Illustration</h2>
+									<p>In at accumsan risus. Nam id volutpat ante. Etiam vel mi mattis, vulputate nunc nec, sodales nibh. Etiam nulla magna, gravida eget ultricies sit amet, hendrerit in lorem.</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="service">
+									<i class="fa fa-heart-o"></i>
+									<h2>3D Modeling</h2>
+									<p>In at accumsan risus. Nam id volutpat ante. Etiam vel mi mattis, vulputate nunc nec, sodales nibh. Etiam nulla magna, gravida eget ultricies sit amet, hendrerit in lorem.</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="service">
+									<i class="fa fa-camera-retro"></i>
+									<h2>Photography</h2>
+									<p>In at accumsan risus. Nam id volutpat ante. Etiam vel mi mattis, vulputate nunc nec, sodales nibh. Etiam nulla magna, gravida eget ultricies sit amet, hendrerit in lorem.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div><!-- ABOUT ME -->
+
+
 			<div class="content-block" id="portfolio">
 				<div class="container">
 					<header class="block-heading cleafix">
@@ -116,34 +155,34 @@
 					</header>
 					<section class="block-body">
 						<div class="row">
-							<div class="col-sm-4">
+							<div class="col-sm-4 block-element">
 								<a href="#" class="recent-work" style="background-image:url(assets/images/rain_1-320x240.jpg)">
 									<span class="btn btn-o-white">Lorem Rocks</span>
 								</a>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-4 block-element">
 								<a href="#" class="recent-work" style="background-image:url(assets/images/min_icons_thumb1-320x240.jpg)">
 									<span class="btn btn-o-white">Lorem Rocks</span>
 								</a>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-4 block-element">
 								<a href="#" class="recent-work" style="background-image:url(assets/images/flat_icons_thumb.jpg)">
 									<span class="btn btn-o-white">Lorem Rocks</span>
 								</a>
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-sm-4">
+							<div class="col-sm-4 block-element">
 								<a href="#" class="recent-work" style="background-image:url(assets/images/wood-320x240.jpg)">
 									<span class="btn btn-o-white">Lorem Rocks</span>
 								</a>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-4 block-element">
 								<a href="#" class="recent-work" style="background-image:url(assets/images/bike-320x240.jpg)">
 									<span class="btn btn-o-white">Lorem Rocks</span>
 								</a>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-4 block-element">
 								<a href="#" class="recent-work" style="background-image:url(assets/images/six_1-320x240.jpg)">
 									<span class="btn btn-o-white">Lorem Rocks</span>
 								</a>
@@ -198,21 +237,21 @@
 					<section class="block-body">
 						<div class="row">
 							<div class="col-sm-4 blog-post">
-								<img src="assets/images/bike_water1-1000x600.jpg">
+								<img class="block-image" src="assets/images/bike_water1-1000x600.jpg">
 								<a href="#"><h2>Design Your Mind</h2></a>
 								<div class="date">3 Nov, 2014</div>
 								<p>In at accumsan risus. Nam id volutpat ante. Etiam vel mi mattis, vulputate nunc nec, sodales nibh. Etiam nulla magna, gravida eget ultricies sit amet, hendrerit in lorem.</p>
 								<a href="">Read More</a>
 							</div>
 							<div class="col-sm-4 blog-post">
-								<img src="assets/images/mac_glasses1-1000x600.jpg">
+								<img class="block-image" src="assets/images/mac_glasses1-1000x600.jpg">
 								<a href="#"><h2>Winter Is Comming</h2></a>
 								<div class="date">3 Nov, 2014</div>
 								<p>In at accumsan risus. Nam id volutpat ante. Etiam vel mi mattis, vulputate nunc nec, sodales nibh. Etiam nulla magna, gravida eget ultricies sit amet, hendrerit in lorem.</p>
 								<a href="">Read More</a>
 							</div>
 							<div class="col-sm-4 blog-post">
-								<img src="assets/images/road-1000x600.jpg">
+								<img class="block-image" src="assets/images/road-1000x600.jpg">
 								<a href="#"><h2>The Illustration</h2></a>
 								<div class="date">3 Nov, 2014</div>
 								<p>In at accumsan risus. Nam id volutpat ante. Etiam vel mi mattis, vulputate nunc nec, sodales nibh. Etiam nulla magna, gravida eget ultricies sit amet, hendrerit in lorem.</p>
@@ -317,6 +356,8 @@
 		<script src="assets/js/jquery.actual.min.js"></script>
 		<script src="assets/js/jquery.scrollTo.min.js"></script>
 		<script src="assets/js/script.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
+		<script src="assets/js/home.js"></script>
 
 	</body>
 </html>
