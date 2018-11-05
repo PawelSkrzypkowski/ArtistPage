@@ -6,7 +6,7 @@
 <html class="noIE" lang="en-US" xmlns:th="http://www.thymeleaf.org">
 <!--<![endif]-->
 	<head>
-		<title>Flusk</title>
+		<title th:text="#{title}"></title>
 
 		<!-- meta -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,31 +43,31 @@
 			<div class="cross text-right">
 				<a class="toggleDrawer" href="#"><i class="fa fa-times-circle fa-2x"></i></a>
 			</div>
-			<h2>Navigate</h2>
+			<h2 th:text="#{menu}"></h2>
 			<nav>
 				<ul class="nav nav-pills nav-stacked">
 					<li>
-						<a href="#wrapper"><i class="fa fa-shopping-cart"></i> Sklep</a>
+						<a href="#wrapper"><i class="fa fa-shopping-cart"></i> [[#{menu.shop}]]</a>
 					</li>
 					<li>
-						<a href="#portfolio"><i class="fa fa-phone"></i> Kontakt ze mną</a>
+						<a href="#portfolio"><i class="fa fa-phone"></i> [[#{menu.contact}]]</a>
 					</li>
 					<li>
-						<a href="#services"><i class="fa fa-image"></i> Obrazy na zamówienie</a>
+						<a href="#services"><i class="fa fa-image"></i> [[#{menu.pictures}]]</a>
 					</li>
 					<li>
-						<a href="#blog"><i class="fa fa-users"></i> Współpraca</a>
+						<a href="#blog"><i class="fa fa-users"></i> [[#{menu.cooperation}]]</a>
 					</li>
 					<li>
-						<a href="#parallax"><i class="fa fa-heart"></i> O mojej twórczości</a>
+						<a href="#parallax"><i class="fa fa-heart"></i> [[#{menu.myCreativity}]]</a>
 					</li>
 					<li>
-						<a href="#testimonials"><i class="fa fa-rss"></i> Blog/Eventy</a>
+						<a href="#testimonials"><i class="fa fa-rss"></i> [[#{menu.blog}]]</a>
 					</li>
 				</ul>
 			</nav>
 			<div class="social">
-				<h2>Stay Connected</h2>
+				<h2 th:text="#{menu.social}"></h2>
 				<ul>
 					<li><a href=""><i class="fa fa-facebook-square fa-3x"></i></a></li>
 					<li><a href=""><i class="fa fa-twitter-square fa-3x"></i></a></li>
@@ -99,6 +99,7 @@
 							</select>
 							<a class="toggleDrawer" href="#"><i class="fa fa-bars fa-2x"></i></a>
 						</div>
+						<input class="form-control btn btn-primary" th:value="#{mailing.promobutton}" data-toggle="modal" data-target="#mailingModal">
 					</section>
 				</div>
 			</div><!-- header -->
@@ -106,8 +107,8 @@
 			<div class="content-block parallax" id="about-me"><!-- ABOUT ME -->
 				<div class="container text-center">
 					<header class="block-heading cleafix">
-						<h1>Our Services</h1>
-						<p>A little about what we do</p>
+						<h1 th:text="#{pictures.title}"></h1>
+						<p th:text="#{pictures.desc}"></p>
 					</header>
 					<section class="block-body">
 						<div class="row">
@@ -141,9 +142,9 @@
 			<div class="content-block" id="portfolio">
 				<div class="container">
 					<header class="block-heading cleafix">
-						<a href="#" class="btn btn-o btn-lg pull-right">View All</a>
-						<h1>Our Latest Works</h1>
-						<p>Take a look at some of our recent products</p>
+						<a href="#" class="btn btn-o btn-lg pull-right" th:text="#{latestWork.viewAll}"></a>
+						<h1 th:text="#{latestWork.title}"></h1>
+						<p th:text="#{latestWork.desc}"></p>
 					</header>
 					<section class="block-body">
 						<div class="row">
@@ -184,47 +185,13 @@
 				</div>
 			</div><!-- #portfolio -->
 
-			<div class="content-block parallax" id="services">
-				<div class="container text-center">
-					<header class="block-heading cleafix">
-						<h1>Our Services</h1>
-						<p>A little about what we do</p>
-					</header>
-					<section class="block-body">
-						<div class="row">
-							<div class="col-md-4">
-								<div class="service">
-									<i class="fa fa-send-o"></i>
-									<h2>Illustration</h2>
-									<p>In at accumsan risus. Nam id volutpat ante. Etiam vel mi mattis, vulputate nunc nec, sodales nibh. Etiam nulla magna, gravida eget ultricies sit amet, hendrerit in lorem.</p>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="service">
-									<i class="fa fa-heart-o"></i>
-									<h2>3D Modeling</h2>
-									<p>In at accumsan risus. Nam id volutpat ante. Etiam vel mi mattis, vulputate nunc nec, sodales nibh. Etiam nulla magna, gravida eget ultricies sit amet, hendrerit in lorem.</p>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="service">
-									<i class="fa fa-camera-retro"></i>
-									<h2>Photography</h2>
-									<p>In at accumsan risus. Nam id volutpat ante. Etiam vel mi mattis, vulputate nunc nec, sodales nibh. Etiam nulla magna, gravida eget ultricies sit amet, hendrerit in lorem.</p>
-								</div>
-							</div>
-						</div>
-					</section>
-				</div>
-			</div><!-- #services -->
-
 
 			<div class="content-block" id="blog">
 				<div class="container">
 					<header class="block-heading cleafix">
 						<a href="#" class="btn btn-o btn-lg pull-right">View All</a>
-						<h1>From the Blog</h1>
-						<p>Keep up with the latest happenings.</p>
+						<h1 th:text="#{latestBlog.title}"></h1>
+						<p th:text="#{latestBlog.desc}"></p>
 					</header>
 					<section class="block-body">
 						<div class="row">
@@ -254,19 +221,11 @@
 				</div>
 			</div><!-- #blog -->
 
-
-			<div class="content-block parallax" id="parallax">
-				<div class="container text-center">
-					<h1>In at accumsan risus. Nam id volutpat ante. Etiam vel mi mattis, vulputate nunc nec, sodales nibh. Etiam nulla magna, gravida eget ultricies sit amet, hendrerit.</h1>
-					<a href="" class="btn btn-o-white btn-lg">Get a free quote</a>
-				</div>
-			</div><!-- #parallax -->
-
 			<div class="content-block" id="testimonials">
 				<div class="container">
 					<header class="block-heading cleafix">
-						<h1>Testimonials</h1>
-						<p>Some happy customers have to say.</p>
+						<h1 th:text="#{testimontals.title}"></h1>
+						<p th:text="#{testimontals.desc}"></p>
 					</header>
 					<section class="block-body">
 						<div class="row">
@@ -351,5 +310,60 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
 		<script src="assets/js/home.js"></script>
 
+		<div class="modal fade" id="mailingModal" tabindex="-1" role="dialog" aria-labelledby="mailingModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="mailingModalLabel">MAILING</h4>
+					</div>
+					<div class="modal-body">
+						<h2>Dołączając do grupy mailingowej zyskujesz</h2>
+						<div class="list-group">
+							<a href="#" class="list-group-item">
+								<h4 class="list-group-item-heading">Informacje o newsach</h4>
+								<p class="list-group-item-text">Za każdym razem jak pojawi sie nowa informacja na moim blogu Ty jako pierwszy/a otrzymasz o tym informację!</p>
+							</a>
+							<a href="#" class="list-group-item">
+								<h4 class="list-group-item-heading">Przesylka gratis za pierwsze zamówienie</h4>
+								<p class="list-group-item-text">Dowolne pierwsze zamowienie będzie tańsze o koszty wysyłki.</p>
+							</a>
+							<a href="#" class="list-group-item">
+								<h4 class="list-group-item-heading">Autorski upominek</h4>
+								<p class="list-group-item-text">Do pierwszego zamówienia dołączę ciekawy upominek :)</p>
+							</a>
+						</div>
+						<form class="form-horizontal">
+							<div class="form-group">
+								<label for="mailingName" class="col-sm-2 control-label">Imię</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="mailingName" placeholder="Imię" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="mailingEmail" class="col-sm-2 control-label">E-mail</label>
+								<div class="col-sm-10">
+									<input type="email" class="form-control" id="mailingEmail" placeholder="E-mail" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label>
+											<input type="checkbox"> Wyrażam zgodę na coś tam ...
+										</label>
+									</div>
+								</div>
+							</div>
+							<input id="mailingSubmit" type="submit" hidden="hidden"/>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" onclick="$('#mailingSubmit').trigger('click')">Dodaj do bazy adresowej</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
