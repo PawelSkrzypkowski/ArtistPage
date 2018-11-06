@@ -195,6 +195,9 @@
 					</header>
 					<section class="block-body">
 						<div class="row">
+							<div th:if="${blog != null}" th:each="blogPage, idx : ${blog}" class="col-sm-4 blog-post">
+								<img class="" src=""
+							</div>
 							<div class="col-sm-4 blog-post">
 								<img class="block-image" src="assets/images/bike_water1-1000x600.jpg">
 								<a href="#"><h2>Design Your Mind</h2></a>
