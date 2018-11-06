@@ -298,18 +298,6 @@
 
 		</div><!--/#wrapper-->
 
-
-
-
-		<script src="assets/js/jquery-2.1.3.min.js"></script>
-		<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-		<script src="assets/js/bootstrap.min.js"></script>
-		<script src="assets/js/jquery.actual.min.js"></script>
-		<script src="assets/js/jquery.scrollTo.min.js"></script>
-		<script src="assets/js/script.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
-		<script src="assets/js/home.js"></script>
-
 		<div class="modal fade" id="mailingModal" tabindex="-1" role="dialog" aria-labelledby="mailingModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -333,7 +321,7 @@
 								<p class="list-group-item-text">Do pierwszego zamówienia dołączę ciekawy upominek :)</p>
 							</a>
 						</div>
-						<form class="form-horizontal">
+						<form class="form-horizontal" id="addMailingMemberForm">
 							<div class="form-group">
 								<label for="mailingName" class="col-sm-2 control-label">Imię</label>
 								<div class="col-sm-10">
@@ -350,13 +338,14 @@
 								<div class="col-sm-offset-2 col-sm-10">
 									<div class="checkbox">
 										<label>
-											<input type="checkbox"> Wyrażam zgodę na coś tam ...
+											<input type="checkbox" required> Wyrażam zgodę na coś tam ...
 										</label>
 									</div>
 								</div>
 							</div>
 							<input id="mailingSubmit" type="submit" hidden="hidden"/>
 						</form>
+						<p id="addMailingMemberError" class="danger"></p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -365,5 +354,16 @@
 				</div>
 			</div>
 		</div>
+
+
+		<script src="assets/js/jquery-2.1.3.min.js"></script>
+		<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/jquery.actual.min.js"></script>
+		<script src="assets/js/jquery.scrollTo.min.js"></script>
+		<script src="assets/js/script.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
+		<script src="assets/js/home.js"></script>
+		<script src="assets/js/mailing.js"></script>
 	</body>
 </html>
