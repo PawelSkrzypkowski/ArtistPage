@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="admin/layout :: layout">
+<body>
+<div th:fragment="content">
+    <input type="button" class="btn btn-default" value="Dodaj wpis" onclick="Modal.getAddBlogModal()"/>
+    <table>
+        <thead>
+            <tr>
+                <th>Tytuł</th>
+                <th>Data dodania</th>
+                <th>Autor</th>
+                <th>Edycja</th>
+                <th>Usuń</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${blog != null}" th:each="blogPage : ${blog}">
+            <td th:text="${blogPage.title}"></td>
+            <td th:text="${blogPage.addDate}"></td>
+            <td th:text="${blogPage.author}"></td>
+            <td><input type="button" class="btn btn-primary" th:data-id="${blogPage.id}" value="Edytuj"/></td>
+            <td><input type="button" class="btn btn-danger" th:data-id="${blogPage.id}" value="Usuń"/></td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="modal-holder"></div>
+</div>
+
+</body>
+</html>

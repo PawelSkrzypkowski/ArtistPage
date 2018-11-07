@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html class="noIE" lang="en-US" xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="addBlogModal" class="modal fade" id="addBlogModal" tabindex="-1" role="dialog" aria-labelledby="addBlogModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="mailingModalLabel">Dodaj/Edytuj wpis</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="addBlogForm" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="blogTitle" class="col-sm-2 control-label">Tytuł</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="blogTitle" placeholder="Tytuł" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="blogContent" class="col-sm-2 control-label">Treść</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="blogContent" placeholder="Tytuł" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="blogAddDate" class="col-sm-2 control-label">Data dodania</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="blogAddDate" data-provide="datepicker" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="blogAuthor" class="col-sm-2 control-label">Autor</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="blogAuthor" placeholder="Autor" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="blogPhoto" class="col-sm-2 control-label">Zdjęcie</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="blogPhoto" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="$('#addBlogForm').trigger('submit')">Dodaj/Edytuj wpis</button>
+                </div>
+                <div id="progress-wrp">
+                    <div class="progress-bar"></div>
+                    <div class="status">0%</div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $('#addBlogForm').on('submit', function (e) {
+                e.preventDefault();
+                var data = {
+                    title: $('#blogTitle').val(),
+                    content: $('#blogContent').val(),
+                    addDate: $('#blogAddDate').val(),
+                    author: $('#blogAuthor').val()
+                };
+                $.ajax({
+                    url: "/admin/blog/add",
+                    type: 'POST',
+                    async: true,
+                    data: {
+                        name: $('#mailingName').val(),
+                        email: $('#mailingEmail').val()
+                    },
+                    success: function () {
+                    },
+                    error: function () {
+
+                    }
+                });
+                var file = $('#blogPhoto')[0].files[0];
+                var upload = new Upload(file, "admin/blog/addFile");
+
+                upload.doUpload();
+            });
+        </script>
+    </div>
+</html>

@@ -21,6 +21,9 @@ public class Blog extends BaseEntity {
     private Date addDate;
 
     @Column
+    private String title;
+
+    @Column
     @Lob
     private String content;
 

@@ -86,7 +86,7 @@
 				<div class="header-wrapper-inner">
 					<section class="top clearfix">
 						<div class="pull-left">
-							<h1><a class="logo" href="index.html">Flusk</a>
+							<h1><a class="logo" href="index.html" th:text="#{title}"></a>
 								<div class="pull-right"></div>
 								<a href="https://facebook.com"><img th:src="@{/assets/images/logo/facebook.png}" alt="logo facebook"/></a>
 								<a href="https://facebook.com"><img th:src="@{/assets/images/logo/instagram.png}" alt="logo instagram"/></a>
@@ -189,35 +189,18 @@
 			<div class="content-block" id="blog">
 				<div class="container">
 					<header class="block-heading cleafix">
-						<a href="#" class="btn btn-o btn-lg pull-right">View All</a>
+						<a href="#" class="btn btn-o btn-lg pull-right" th:text="#{latestBlog.viewAll}"></a>
 						<h1 th:text="#{latestBlog.title}"></h1>
 						<p th:text="#{latestBlog.desc}"></p>
 					</header>
 					<section class="block-body">
 						<div class="row">
 							<div th:if="${blog != null}" th:each="blogPage, idx : ${blog}" class="col-sm-4 blog-post">
-								<img class="" src=""
-							</div>
-							<div class="col-sm-4 blog-post">
-								<img class="block-image" src="assets/images/bike_water1-1000x600.jpg">
-								<a href="#"><h2>Design Your Mind</h2></a>
-								<div class="date">3 Nov, 2014</div>
-								<p>In at accumsan risus. Nam id volutpat ante. Etiam vel mi mattis, vulputate nunc nec, sodales nibh. Etiam nulla magna, gravida eget ultricies sit amet, hendrerit in lorem.</p>
-								<a href="">Read More</a>
-							</div>
-							<div class="col-sm-4 blog-post">
-								<img class="block-image" src="assets/images/mac_glasses1-1000x600.jpg">
-								<a href="#"><h2>Winter Is Comming</h2></a>
-								<div class="date">3 Nov, 2014</div>
-								<p>In at accumsan risus. Nam id volutpat ante. Etiam vel mi mattis, vulputate nunc nec, sodales nibh. Etiam nulla magna, gravida eget ultricies sit amet, hendrerit in lorem.</p>
-								<a href="">Read More</a>
-							</div>
-							<div class="col-sm-4 blog-post">
-								<img class="block-image" src="assets/images/road-1000x600.jpg">
-								<a href="#"><h2>The Illustration</h2></a>
-								<div class="date">3 Nov, 2014</div>
-								<p>In at accumsan risus. Nam id volutpat ante. Etiam vel mi mattis, vulputate nunc nec, sodales nibh. Etiam nulla magna, gravida eget ultricies sit amet, hendrerit in lorem.</p>
-								<a href="">Read More</a>
+								<!--TODO: <img class="block-image" th:src="${blogImages[idx]}"/>-->
+								<a href="#"><h2 th:text="${blogPage.title}"></h2></a>
+								<div class="date" th:text="${#dates.format(blogPage.addDate, 'dd-MM-yyyy')}"></div>
+								<p th:text="${blogPage.content}"></p>
+								<a href="" th:text="#{latestBlog.readMore}"></a>
 							</div>
 						</div>
 					</section>
@@ -292,8 +275,7 @@
 			<div class="content-block" id="footer">
 				<div class="container">
 					<div class="row">
-						<div class="col-xs-6">&copy; Copyright Flusk 2014</div>
-						<div class="col-xs-6 text-right">Theme by <a href="https://themewagon.com/" target="_blank">ThemeWagon</a></div>
+						<div class="col-xs-6">&copy; Copyright 2018</div>
 					</div>
 				</div>
 			</div><!-- #footer -->
