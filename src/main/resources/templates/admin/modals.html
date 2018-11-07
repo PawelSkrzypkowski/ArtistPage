@@ -5,45 +5,47 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="mailingModalLabel">Dodaj/Edytuj wpis</h4>
+                    <h4 class="modal-title" id="addBlogModalLabel">Dodaj/Edytuj wpis</h4>
                 </div>
                 <div class="modal-body">
                     <form id="addBlogForm" class="form-horizontal">
+                        <input type="text" id="blogId" hidden="hidden" th:value="${blogPage != null ? blogPage.id : ''}">
                         <div class="form-group">
                             <label for="blogTitle" class="col-sm-2 control-label">Tytuł</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="blogTitle" placeholder="Tytuł" required>
+                                <input type="text" class="form-control" id="blogTitle" th:value="${blogPage != null ? blogPage.title : ''}" placeholder="Tytuł" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="blogContent" class="col-sm-2 control-label">Treść</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" id="blogContent" placeholder="Tytuł" required></textarea>
+                                <textarea class="form-control" id="blogContent" placeholder="Treść" th:text="${blogPage != null ? blogPage.content : ''}" required></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="blogAddDate" class="col-sm-2 control-label">Data dodania</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="blogAddDate" data-provide="datepicker" required>
+                                <input type="text" class="form-control" id="blogAddDate" data-provide="datepicker" th:value="${blogPage != null ? #dates.format(blogPage.addDate, 'MM/dd/yyyy') : ''}" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="blogAuthor" class="col-sm-2 control-label">Autor</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="blogAuthor" placeholder="Autor" required>
+                                <input type="text" class="form-control" id="blogAuthor" placeholder="Autor" th:value="${blogPage != null ? blogPage.author : ''}" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="blogPhoto" class="col-sm-2 control-label">Zdjęcie</label>
                             <div class="col-sm-10">
-                                <input type="file" class="form-control" id="blogPhoto" required>
+                                <input type="file" class="form-control" id="blogPhoto" th:required="${blogPage == null || (blogPage != null && blogPage.id == null)}">
                             </div>
                         </div>
+                        <input type="submit" hidden="hidden" id="addBlockFormSubmit"/>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="$('#addBlogForm').trigger('submit')">Dodaj/Edytuj wpis</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                    <button type="button" class="btn btn-primary" onclick="$('#addBlockFormSubmit').trigger('click')">Dodaj/Edytuj wpis</button>
                 </div>
                 <div id="progress-wrp">
                     <div class="progress-bar"></div>
@@ -60,24 +62,70 @@
                     addDate: $('#blogAddDate').val(),
                     author: $('#blogAuthor').val()
                 };
+                var action = "add";
+                if($('#blogId').val()){
+                    data.id = $('#blogId').val();
+                    action = "edit";
+                }
                 $.ajax({
-                    url: "/admin/blog/add",
+                    url: "/admin/blog/" + action,
                     type: 'POST',
                     async: true,
-                    data: {
-                        name: $('#mailingName').val(),
-                        email: $('#mailingEmail').val()
-                    },
-                    success: function () {
+                    data: data,
+                    success: function (data) {
+                        console.log(data);
+                        var file = $('#blogPhoto')[0].files[0];
+                        if(file){
+                            var upload = new Upload(file, "/admin/blog/addImage/" + data.id);
+
+                            upload.doUpload(function (data) {
+                                if(data === "success"){
+                                    $('#addBlogModal').modal('hide');
+                                } else {
+                                    alert("Wgranie zdjęcia nie powiodło się, usuń dodany wpis na blogu i wgraj zdjęcie .png lub .jpeg")
+                                }
+                            });
+                        } else {
+                            $('#addBlogModal').modal('hide');
+                        }
                     },
                     error: function () {
-
+                        console.log('fail');
                     }
                 });
-                var file = $('#blogPhoto')[0].files[0];
-                var upload = new Upload(file, "admin/blog/addFile");
+            });
+        </script>
+    </div>
 
-                upload.doUpload();
+    <div th:fragment="deleteBlogModal" class="modal fade" id="deleteBlogModal" tabindex="-1" role="dialog" aria-labelledby="deleteBlogModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="deleteBlogModalLabel">Usuń wpis</h4>
+                </div>
+                <div class="modal-body">
+                    Czy na pewno chcesz usunąć wpis?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                    <button type="button" class="btn btn-primary" id="submitDeleteBlog" th:data-id="${id}">Usuń</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            $('#submitDeleteBlog').on('click', function (e) {
+                $.ajax({
+                    url: "/admin/blog/delete/" + $('#submitDeleteBlog').attr('data-id'),
+                    type: 'POST',
+                    async: true,
+                    success: function (data) {
+                        $('#deleteBlogModal').modal('hide');
+                    },
+                    error: function () {
+                        console.log('fail');
+                    }
+                });
             });
         </script>
     </div>

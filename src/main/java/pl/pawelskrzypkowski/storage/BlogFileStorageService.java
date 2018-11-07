@@ -91,6 +91,11 @@ public class BlogFileStorageService implements StorageService {
     }
 
     @Override
+    public void delete(String filename) throws IOException {
+        Files.delete(load(filename));
+    }
+
+    @Override
     public void init() {
         try {
             Files.createDirectories(rootLocation);

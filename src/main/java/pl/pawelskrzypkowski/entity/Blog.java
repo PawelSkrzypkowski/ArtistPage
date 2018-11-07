@@ -1,6 +1,7 @@
 package pl.pawelskrzypkowski.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.Where;
 import pl.pawelskrzypkowski.entity.base.BaseEntity;
 
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import java.util.Date;
 
 @Entity
 @Data
+@Where(clause = "active!=false")
 public class Blog extends BaseEntity {
     @Id
     @GeneratedValue

@@ -12,7 +12,7 @@ Upload.prototype.getSize = function() {
 Upload.prototype.getName = function() {
     return this.file.name;
 };
-Upload.prototype.doUpload = function () {
+Upload.prototype.doUpload = function (successCallback) {
     var that = this;
     var formData = new FormData();
     var url = this.url;
@@ -31,9 +31,7 @@ Upload.prototype.doUpload = function () {
             }
             return myXhr;
         },
-        success: function (data) {
-            // your callback here
-        },
+        success: successCallback,
         error: function (error) {
             // handle error
         },

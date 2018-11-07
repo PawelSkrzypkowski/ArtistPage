@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.pawelskrzypkowski.entity.Blog;
 import pl.pawelskrzypkowski.repository.BlogRepository;
+import pl.pawelskrzypkowski.storage.StorageFileNotFoundException;
 import pl.pawelskrzypkowski.storage.StorageService;
 
 import java.util.List;
@@ -30,7 +31,13 @@ public class HomeController {
     @RequestMapping("/")
     public String home(Model model){
         List<Blog> latestBlogs = blogRepository.findTop3ByOrderByAddDateDesc();
-        List<Resource> blogImages = latestBlogs.stream().map(b->blogStorageService.loadAsResource(b.getId().toString())).
+        List<Resource> blogImages = latestBlogs.stream().map(b->{
+            try {
+                return blogStorageService.loadAsResource(b.getId() + ".jpeg");
+            } catch (StorageFileNotFoundException e){
+                return blogStorageService.loadAsResource(b.getId() + ".png");
+            }
+        }).
                 collect(Collectors.toList());
         model.addAttribute("blog", latestBlogs);
         model.addAttribute("blogImages", blogImages);

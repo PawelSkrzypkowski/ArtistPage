@@ -5,7 +5,7 @@
 <body>
 <div th:fragment="content">
     <input type="button" class="btn btn-default" value="Dodaj wpis" onclick="Modal.getAddBlogModal()"/>
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Tytuł</th>
@@ -20,12 +20,21 @@
             <td th:text="${blogPage.title}"></td>
             <td th:text="${blogPage.addDate}"></td>
             <td th:text="${blogPage.author}"></td>
-            <td><input type="button" class="btn btn-primary" th:data-id="${blogPage.id}" value="Edytuj"/></td>
-            <td><input type="button" class="btn btn-danger" th:data-id="${blogPage.id}" value="Usuń"/></td>
+            <td><input type="button" class="btn btn-primary blogPageEdit" th:data-id="${blogPage.id}" value="Edytuj"/></td>
+            <td><input type="button" class="btn btn-danger blogPageDelete" th:data-id="${blogPage.id}" value="Usuń"/></td>
         </tr>
         </tbody>
     </table>
     <div id="modal-holder"></div>
+    <script th:src="@{/assets/js/jquery-2.1.3.min.js}"></script>
+    <script>
+        $('.blogPageEdit').on('click', function () {
+            Modal.getEditBlogModal($(this).attr('data-id'));
+        });
+        $('.blogPageDelete').on('click', function () {
+            Modal.getDeleteBlogModal($(this).attr('data-id'));
+        });
+    </script>
 </div>
 
 </body>
