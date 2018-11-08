@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]><html class="ie ie7 lte9 lte8 lte7" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="en-US">	<![endif]-->
+<!--[if IE 9]><html class="ie ie9 lte9" lang="en-US"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="noIE" lang="en-US" xmlns:th="http://www.thymeleaf.org" th:fragment="layout">
+<!--<![endif]-->
+<head>
+    <title th:text="#{title}"></title>
+
+    <!-- meta -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <!-- google fonts -->
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans'>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Serif:regular,bold"/>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Alegreya+Sans:regular,italic,bold,bolditalic"/>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nixie+One:regular,italic,bold,bolditalic"/>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Alegreya+SC:regular,italic,bold,bolditalic"/>
+
+    <!-- css -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}" media="screen"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css"/>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script th:src="@{/assets/js/html5shiv.js}"></script>
+    <script th:src="@{/assets/js/respond.js}"></script>
+    <![endif]-->
+
+    <!--[if IE 8]>
+    <script th:src="@{/assets/js/selectivizr.js}"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div id="drawer-right">
+    <div class="cross text-right">
+        <a class="toggleDrawer" href="#"><i class="fa fa-times-circle fa-2x"></i></a>
+    </div>
+    <h2 th:text="#{menu}"></h2>
+    <nav>
+        <ul class="nav nav-pills nav-stacked">
+            <li>
+                <a href="#wrapper"><i class="fa fa-shopping-cart"></i> [[#{menu.shop}]]</a>
+            </li>
+            <li>
+                <a href="#portfolio"><i class="fa fa-phone"></i> [[#{menu.contact}]]</a>
+            </li>
+            <li>
+                <a href="#services"><i class="fa fa-image"></i> [[#{menu.pictures}]]</a>
+            </li>
+            <li>
+                <a href="#blog"><i class="fa fa-users"></i> [[#{menu.cooperation}]]</a>
+            </li>
+            <li>
+                <a href="#parallax"><i class="fa fa-heart"></i> [[#{menu.myCreativity}]]</a>
+            </li>
+            <li>
+                <a href="#testimonials"><i class="fa fa-rss"></i> [[#{menu.blog}]]</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="social">
+        <h2 th:text="#{menu.social}"></h2>
+        <ul>
+            <li><a href=""><i class="fa fa-facebook-square fa-3x"></i></a></li>
+            <li><a href=""><i class="fa fa-twitter-square fa-3x"></i></a></li>
+            <li><a href=""><i class="fa fa-tumblr-square fa-3x"></i></a></li>
+            <li><a href=""><i class="fa fa-google-plus-square fa-3x"></i></a></li>
+        </ul>
+    </div>
+</div><!-- #drawer-right -->
+
+<div id="wrapper">
+    <div id="header" class="content-block">
+        <div class="header-wrapper-inner">
+            <section class="top clearfix">
+                <div class="pull-left">
+                    <h1><a class="logo" href="index.html" th:text="#{title}"></a>
+                        <div class="pull-right"></div>
+                        <a href="https://facebook.com"><img th:src="@{/assets/images/logo/facebook.png}" alt="logo facebook"/></a>
+                        <a href="https://facebook.com"><img th:src="@{/assets/images/logo/instagram.png}" alt="logo instagram"/></a>
+                    </h1>
+                </div>
+                <div class="pull-right">
+                    <select class="selectpicker" data-width="fit">
+                        <option data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
+                        <option data-content='<span class="flag-icon flag-icon-pl"></span> Polski' selected>Polski</option>
+                    </select>
+                    <a class="toggleDrawer" href="#"><i class="fa fa-bars fa-2x"></i></a>
+                </div>
+                <input class="form-control btn btn-primary" th:value="#{mailing.promobutton}" onclick="Modal.getMailingModal()">
+            </section>
+        </div>
+    </div><!-- header -->
+    <div style="margin-top: 100px">
+        <div th:include="this :: content"/>
+    </div>
+
+    <div class="content-block" id="contact">
+        <div class="container text-center">
+            <header class="block-heading cleafix">
+                <h1 th:text="#{contact.title}"></h1>
+                <p th:text="#{contact.description}"></p>
+            </header>
+            <section class="block-body">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <form class="" role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-white" id="subject" th:placeholder="#{contact.form.name}" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control form-control-white" id="exampleInputEmail2" th:placeholder="#{contact.form.email}" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control form-control-white" th:placeholder="#{contact.form.message}" required></textarea>
+                            </div>
+                            <input type="submit" class="btn btn-o-white" th:value="#{contact.form.submit}">
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div><!-- #contact -->
+
+    <div class="content-block" id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6">&copy; Copyright 2018</div>
+            </div>
+        </div>
+    </div><!-- #footer -->
+
+
+</div><!--/#wrapper-->
+<div id="modal-holder"></div>
+
+<script th:src="@{/assets/js/jquery-2.1.3.min.js}"></script>
+<script th:src="@{/assets/js/jquery-migrate-1.2.1.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/jquery.actual.min.js}"></script>
+<script th:src="@{/assets/js/jquery.scrollTo.min.js}"></script>
+<script th:src="@{/assets/js/script.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
+<script th:src="@{/assets/js/home.js}"></script>
+<script th:src="@{/assets/js/mailing.js}"></script>
+<script th:src="@{/assets/js/modal-utils.js}"></script>
+</body>
+</html>

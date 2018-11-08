@@ -31,3 +31,14 @@ Modal.getDeleteBlogModal = function (id) {
         }
     });
 };
+
+Modal.getMailingModal = function () {
+    var url = '/modal/mailing';
+    $.ajax({
+        url: url,
+        success: function (data) {
+            $("#modal-holder").html(data);
+            $("#mailingModal").modal('show');
+        }
+    });
+};

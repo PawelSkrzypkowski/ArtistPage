@@ -7,9 +7,12 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.pawelskrzypkowski.entity.Blog;
+import pl.pawelskrzypkowski.repository.BlogRepository;
 import pl.pawelskrzypkowski.storage.StorageFileNotFoundException;
 import pl.pawelskrzypkowski.storage.StorageService;
 
@@ -19,6 +22,9 @@ import java.nio.file.Files;
 @Controller
 @RequestMapping("/blog")
 public class BlogController {
+    @Autowired
+    BlogRepository blogRepository;
+
     @Autowired
     @Qualifier("blogFileStorageService")
     StorageService blogStorageService;
@@ -42,8 +48,13 @@ public class BlogController {
         byte[] image;
         long contentLength;
         try {
-            image = Files.readAllBytes(resource.getFile().toPath());
-            contentLength = image.length;
+            if(resource == null){
+                image = null;
+                contentLength = 0;
+            } else {
+                image = Files.readAllBytes(resource.getFile().toPath());
+                contentLength = image.length;
+            }
         } catch (IOException e) {
             image = null;
             contentLength = 0;
@@ -52,5 +63,18 @@ public class BlogController {
         headers.setContentType(mediaType);
         headers.setContentLength(contentLength);
         return new HttpEntity<>(image, headers);
+    }
+
+    @GetMapping("/{id}")
+    public String getBlogPage(@PathVariable("id") Long id, Model model){
+        Blog blog = blogRepository.getOne(id);
+        model.addAttribute("blogPage", blog);
+        return "blog/blogPage";
+    }
+
+    @GetMapping("")
+    public String getMainBlog(Model model){
+        model.addAttribute("blog", blogRepository.findAllByOrderByAddDateDesc());
+        return "blog/main";
     }
 }

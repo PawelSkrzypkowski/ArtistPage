@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html class="noIE" lang="en-US" xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="mailingModal" class="modal fade" id="mailingModal" tabindex="-1" role="dialog" aria-labelledby="mailingModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="mailingModalLabel">MAILING</h4>
+                </div>
+                <div class="modal-body">
+                    <h2>Dołączając do grupy mailingowej zyskujesz</h2>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item">
+                            <h4 class="list-group-item-heading">Informacje o newsach</h4>
+                            <p class="list-group-item-text">Za każdym razem jak pojawi sie nowa informacja na moim blogu Ty jako pierwszy/a otrzymasz o tym informację!</p>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <h4 class="list-group-item-heading">Przesylka gratis za pierwsze zamówienie</h4>
+                            <p class="list-group-item-text">Dowolne pierwsze zamowienie będzie tańsze o koszty wysyłki.</p>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <h4 class="list-group-item-heading">Autorski upominek</h4>
+                            <p class="list-group-item-text">Do pierwszego zamówienia dołączę ciekawy upominek :)</p>
+                        </a>
+                    </div>
+                    <form class="form-horizontal" id="addMailingMemberForm">
+                        <div class="form-group">
+                            <label for="mailingName" class="col-sm-2 control-label">Imię</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="mailingName" placeholder="Imię" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mailingEmail" class="col-sm-2 control-label">E-mail</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="mailingEmail" placeholder="E-mail" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" required> Wyrażam zgodę na coś tam ...
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <input id="mailingSubmit" type="submit" hidden="hidden"/>
+                    </form>
+                    <p id="addMailingMemberError" class="danger"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="$('#mailingSubmit').trigger('click')">Dodaj do bazy adresowej</button>
+                </div>
+            </div>
+        </div>
+        <script th:src="@{/assets/js/mailing.js}"></script>
+    </div>
+</html>

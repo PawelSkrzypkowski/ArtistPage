@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="layout :: layout">
+<body>
+<div th:fragment="content">
+    <div class="content-block" id="blog">
+        <div class="container">
+            <header class="block-heading cleafix">
+                <a  th:href="@{/blog}" class="btn btn-o btn-lg pull-right" th:text="#{latestBlog.viewAll}"></a>
+                <h1 th:text="#{blog.title}"></h1>
+            </header>
+            <section class="block-body">
+                <div class="row">
+                    <div th:if="${blogPage != null}" class="col-sm-8 blog-post">
+                        <img class="block-image" th:src="|@{/blog/image/}${blogPage.id}|"/>
+                        <h2 th:text="${blogPage.title}"></h2>
+                        <div class="date" th:text="${#dates.format(blogPage.addDate, 'dd-MM-yyyy')}"></div>
+                        <div th:utext="${blogPage.content}"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div><!-- #blog -->
+</div>
+
+</body>
+</html>
