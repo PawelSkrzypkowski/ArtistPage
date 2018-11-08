@@ -12,6 +12,7 @@
             </header>
             <section class="block-body">
                 <div class="row">
+                    <!-- TODO: dodać paginację -->
                     <div th:if="${blog != null}" th:each="blogPage, idx : ${blog}" class="col-sm-4 blog-post">
                         <img class="block-image" th:src="|@{/blog/image/}${blogPage.id}|"/>
                         <a th:href="|@{/blog/}${blogPage.id}|"><h2 th:text="${blogPage.title}"></h2></a>
