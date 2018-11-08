@@ -196,10 +196,10 @@
 					<section class="block-body">
 						<div class="row">
 							<div th:if="${blog != null}" th:each="blogPage, idx : ${blog}" class="col-sm-4 blog-post">
-								<!--TODO: <img class="block-image" th:src="${blogImages[idx]}"/>-->
+								<img class="block-image" th:src="|@{/blog/image/}${blogPage.id}|"/>
 								<a href="#"><h2 th:text="${blogPage.title}"></h2></a>
 								<div class="date" th:text="${#dates.format(blogPage.addDate, 'dd-MM-yyyy')}"></div>
-								<p th:text="${blogPage.content}"></p>
+								<div style="line-height: 2.5ex; max-height: 12.5ex; overflow: hidden;" th:utext="${blogPage.content}"></div>
 								<a href="" th:text="#{latestBlog.readMore}"></a>
 							</div>
 						</div>
