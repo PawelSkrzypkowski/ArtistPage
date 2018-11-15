@@ -130,4 +130,90 @@
             });
         </script>
     </div>
+
+    <div th:fragment="sendMailModal" class="modal fade" id="sendMailModal" tabindex="-1" role="dialog" aria-labelledby="sendMailModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="sendMailModalLabel">Dodaj/Edytuj wpis</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="sendMailForm" class="form-horizontal">
+                        <input type="text" id="blogId" hidden="hidden" th:value="${blogPage != null ? blogPage.id : ''}">
+                        <div class="form-group">
+                            <label for="blogTitle" class="col-sm-2 control-label">Tytuł</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="mailTitle" placeholder="Tytuł" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="blogContent" class="col-sm-2 control-label">Treść</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="mailContent" placeholder="Treść" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="blogPhoto" class="col-sm-2 control-label">Załączniki</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="mailAttachments">
+                            </div>
+                        </div>
+                        <input type="submit" hidden="hidden" id="sendMailFormSubmit"/>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                    <button type="button" class="btn btn-primary" onclick="$('#sendMailFormSubmit').trigger('click')">Wyślij</button>
+                </div>
+                <div id="progress-wrp">
+                    <div class="progress-bar"></div>
+                    <div class="status">0%</div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $('#mailContent').summernote();
+            $('#sendMailForm').on('submit', function (e) {
+                e.preventDefault();
+                var data = {
+                    title: $('#blogTitle').val(),
+                    content: $('#blogContent').val(),
+                    addDate: $('#blogAddDate').val(),
+                    author: $('#blogAuthor').val()
+                };
+                var action = "add";
+                if($('#blogId').val()){
+                    data.id = $('#blogId').val();
+                    action = "edit";
+                }
+                $.ajax({
+                    url: "/admin/blog/" + action,
+                    type: 'POST',
+                    async: true,
+                    data: data,
+                    success: function (data) {
+                        console.log(data);
+                        var file = $('#blogPhoto')[0].files[0];
+                        if(file){
+                            var upload = new Upload(file, "/admin/blog/addImage/" + data.id);
+
+                            upload.doUpload(function (data) {
+                                if(data === "success"){
+                                    $('#addBlogModal').modal('hide');
+                                } else {
+                                    alert("Wgranie zdjęcia nie powiodło się, usuń dodany wpis na blogu i wgraj zdjęcie .png lub .jpeg")
+                                }
+                            });
+                        } else {
+                            $('#addBlogModal').modal('hide');
+                        }
+                    },
+                    error: function () {
+                        console.log('fail');
+                    }
+                });
+            });
+        </script>
+    </div>
 </html>

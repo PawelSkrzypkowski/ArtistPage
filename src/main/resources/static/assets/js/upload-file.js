@@ -1,6 +1,7 @@
-var Upload = function (file, url) {
+var Upload = function (file, url, additionalData) {
     this.file = file;
     this.url = url;
+    this.additionalData = additionalData;
 };
 
 Upload.prototype.getType = function() {
@@ -18,8 +19,21 @@ Upload.prototype.doUpload = function (successCallback) {
     var url = this.url;
 
     // add assoc key values, this will be posts values
-    formData.append("file", this.file, this.getName());
+    if(Array.isArray(this.file)){
+        var array = [];
+        $.each(this.file, function (idx, val) {
+            array.push({file: val, name: val.name});
+        });
+        formData.append("files", array);
+    } else {
+        formData.append("file", this.file, this.getName());
+    }
     formData.append("upload_file", true);
+    if(this.additionalData && Array.isArray(this.additionalData)){
+        $.each(this.additionalData, function (idx, val) {
+            formData.append(val.name, val.value);
+        });
+    }
 
     $.ajax({
         type: "POST",

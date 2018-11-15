@@ -42,3 +42,14 @@ Modal.getMailingModal = function () {
         }
     });
 };
+
+Modal.getSendMailModal = function (id) {
+    var url = '/admin/modal/sendMail/' + id;
+    $.ajax({
+        url: url,
+        success: function (data) {
+            $("#modal-holder").html(data);
+            $("#sendMailModal").modal('show');
+        }
+    });
+};

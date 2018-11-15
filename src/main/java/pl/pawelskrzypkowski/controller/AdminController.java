@@ -100,4 +100,10 @@ public class AdminController {
         }
         return "success";
     }
+
+    @GetMapping(value = "/modal/sendMail/{id}")
+    public String sendMailModal(@PathVariable("id") Long id, Model model){
+        model.addAttribute("id", id);
+        return "admin/modals::sendMailModal";
+    }
 }
