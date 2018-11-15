@@ -17,6 +17,7 @@ public class MailController {
     @PostMapping("/member/add")
     @ResponseBody
     public MailingMember addMember(MailingMember mailingMember){
+        mailingMember.setActive(true);
         return mailingMemberRepository.save(mailingMember);
     }
 }

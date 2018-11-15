@@ -2,6 +2,7 @@ package pl.pawelskrzypkowski.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +18,17 @@ import pl.pawelskrzypkowski.repository.BlogRepository;
 import pl.pawelskrzypkowski.repository.MailingMemberRepository;
 import pl.pawelskrzypkowski.service.EmailServiceImpl;
 import pl.pawelskrzypkowski.storage.StorageService;
+import pl.pawelskrzypkowski.util.ClassWrapper;
 
+import javax.mail.MessagingException;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -127,6 +135,51 @@ public class AdminController {
     @ResponseBody
     public String handleSendMail(@PathVariable("id") Long id, @RequestParam("file") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("content") String content){
         MailingMember mailingMember = mailingMemberRepository.getOne(id);
-        emailService.sendMessageWithAttachment(mailingMember.getEmail(), title, content, );
+        Map<String, ByteArrayResource> convertedFiles;
+        try {
+            convertedFiles = emailService.convertMultipartFiles(files);
+        } catch (IOException e) {
+            convertedFiles = new LinkedHashMap<>();
+        }
+        try {
+            return emailService.sendMessageWithAttachment(mailingMember.getEmail(), title, content, convertedFiles);
+        } catch (MessagingException e) {
+            return "fail";
+        }
+    }
+
+    @PostMapping("/mail/delete/{id}")
+    @ResponseBody
+    public String deleteMailingMember(@PathVariable("id") Long id){
+        mailingMemberRepository.setActiveFalse(id);
+        return "success";
+    }
+
+    @GetMapping(value = "/modal/deleteMailMember/{id}")
+    public String deleteMailMemberModal(@PathVariable("id") Long id, Model model){
+        model.addAttribute("id", id);
+        return "admin/modals::deleteMailMemberModal";
+    }
+
+    @PostMapping("/mail/sendMultipleMail")
+    @ResponseBody
+    public String handleSendMultipleMail(@RequestParam("file") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("content") String content){
+        ClassWrapper<Boolean> booleanClassWrapper = new ClassWrapper<>(false);
+        mailingMemberRepository.findAll().stream().map(MailingMember::getId).forEach(idx->{
+            String returnValue = handleSendMail(idx, files, title, content);
+            if(returnValue.equals("fail")){
+                booleanClassWrapper.setObject(true);
+            }
+        });
+        if(booleanClassWrapper.getObject()){
+            return "fail";
+        }
+        return "success";
+    }
+
+    @GetMapping(value = "/modal/sendMultipleMail")
+    public String sendMailModal(Model model){
+        model.addAttribute("id", -1);
+        return "admin/modals::sendMailModal";
     }
 }

@@ -64,3 +64,14 @@ Modal.getDeleteMailMemberModal = function (id) {
         }
     });
 };
+
+Modal.getSendMailToAllModal = function () {
+    var url = '/admin/modal/sendMultipleMail';
+    $.ajax({
+        url: url,
+        success: function (data) {
+            $("#modal-holder").html(data);
+            $("#sendMailModal").modal('show');
+        }
+    });
+};

@@ -185,12 +185,50 @@
                 $.each($('#mailAttachments')[0].files, function (idx, val) {
                     files.push(val);
                 });
-                var upload = new Upload(files, "/admin/mail/sendMail/" + memberId, data);
+                var upload;
+                if(memberId === "-1"){
+                    upload = new Upload(files, "/admin/mail/sendMultipleMail", data);
+                } else {
+                    upload = new Upload(files, "/admin/mail/sendMail/" + memberId, data);
+                }
                 upload.doUpload(function (data) {
                     if (data === "success") {
                         $('#sendMailModal').modal('hide');
                     } else {
                         alert("Wysyłanie maila nie powiodło się.")
+                    }
+                });
+            });
+        </script>
+    </div>
+
+    <div th:fragment="deleteMailMemberModal" class="modal fade" id="deleteMailMemberModal" tabindex="-1" role="dialog" aria-labelledby="deleteMailMemberModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="deleteMailMemberModalLabel">Usuń wpis</h4>
+                </div>
+                <div class="modal-body">
+                    Czy na pewno chcesz usunąć wpis?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                    <button type="button" class="btn btn-primary" id="submitDeleteMailMember" th:data-id="${id}">Usuń</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            $('#submitDeleteMailMember').on('click', function (e) {
+                $.ajax({
+                    url: "/admin/mail/delete/" + $('#submitDeleteMailMember').attr('data-id'),
+                    type: 'POST',
+                    async: true,
+                    success: function (data) {
+                        $('#deleteMailMemberModal').modal('hide');
+                    },
+                    error: function () {
+                        console.log('fail');
                     }
                 });
             });
