@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import pl.pawelskrzypkowski.entity.Blog;
+import pl.pawelskrzypkowski.entity.MailingMember;
 import pl.pawelskrzypkowski.repository.BlogRepository;
+import pl.pawelskrzypkowski.repository.MailingMemberRepository;
+import pl.pawelskrzypkowski.service.EmailServiceImpl;
 import pl.pawelskrzypkowski.storage.StorageService;
 
 import java.io.IOException;
@@ -28,6 +31,12 @@ public class AdminController {
     @Autowired
     @Qualifier("blogFileStorageService")
     StorageService blogStorageService;
+
+    @Autowired
+    MailingMemberRepository mailingMemberRepository;
+
+    @Autowired
+    EmailServiceImpl emailService;
 
     @GetMapping(value = {"", "/"})
     public String mainPage(Model model){
@@ -105,5 +114,19 @@ public class AdminController {
     public String sendMailModal(@PathVariable("id") Long id, Model model){
         model.addAttribute("id", id);
         return "admin/modals::sendMailModal";
+    }
+
+    @GetMapping("/mailing")
+    public String getMailingPage(Model model){
+        List<MailingMember> members = mailingMemberRepository.findAll();
+        model.addAttribute("members", members);
+        return "admin/mailing";
+    }
+
+    @PostMapping("/mail/sendMail/{id}")
+    @ResponseBody
+    public String handleSendMail(@PathVariable("id") Long id, @RequestParam("file") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("content") String content){
+        MailingMember mailingMember = mailingMemberRepository.getOne(id);
+        emailService.sendMessageWithAttachment(mailingMember.getEmail(), title, content, );
     }
 }

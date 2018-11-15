@@ -25,10 +25,10 @@
     <script th:src="@{/assets/js/jquery-2.1.3.min.js}"></script>
     <script>
         $('.mailSend').on('click', function () {
-            Modal.getEditBlogModal($(this).attr('data-id'));
+            Modal.getSendMailModal($(this).attr('data-id'));
         });
         $('.memberDelete').on('click', function () {
-            Modal.getDeleteBlogModal($(this).attr('data-id'));
+            Modal.getDeleteMailMemberModal($(this).attr('data-id'));
         });
     </script>
 </div>

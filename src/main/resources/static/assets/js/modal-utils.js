@@ -53,3 +53,14 @@ Modal.getSendMailModal = function (id) {
         }
     });
 };
+
+Modal.getDeleteMailMemberModal = function (id) {
+    var url = '/admin/modal/deleteMailMember/' + id;
+    $.ajax({
+        url: url,
+        success: function (data) {
+            $("#modal-holder").html(data);
+            $("#deleteMailMemberModal").modal('show');
+        }
+    });
+};

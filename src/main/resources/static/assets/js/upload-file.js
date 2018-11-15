@@ -17,21 +17,20 @@ Upload.prototype.doUpload = function (successCallback) {
     var that = this;
     var formData = new FormData();
     var url = this.url;
-
+    console.log(this.file.length);
+    console.log(this.additionalData);
     // add assoc key values, this will be posts values
     if(Array.isArray(this.file)){
-        var array = [];
         $.each(this.file, function (idx, val) {
-            array.push({file: val, name: val.name});
+            formData.append("file", val, val.name);
         });
-        formData.append("files", array);
     } else {
         formData.append("file", this.file, this.getName());
     }
     formData.append("upload_file", true);
-    if(this.additionalData && Array.isArray(this.additionalData)){
+    if(this.additionalData){
         $.each(this.additionalData, function (idx, val) {
-            formData.append(val.name, val.value);
+            formData.append(idx, val);
         });
     }
 
