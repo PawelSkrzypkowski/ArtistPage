@@ -2,12 +2,12 @@ package pl.pawelskrzypkowski.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.Where;
-import pl.pawelskrzypkowski.entity.base.BaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Date;
 
 /**
  * Created by Paweł Skrzypkowski
@@ -17,32 +17,20 @@ import javax.persistence.Id;
 @Entity
 @Data
 @Where(clause = "active!=false")
-public class Address extends BaseEntity {
+public class DiscountCode {
     @Id
     @GeneratedValue
     private Long id;
 
     @Column
-    private String customerName;
+    String code;
 
     @Column
-    private String customerSurname;
+    Integer activeLicenses;
 
     @Column
-    private String street;
+    Date validUntil;
 
     @Column
-    private String streetNumber;
-
-    @Column
-    private String apartmentNumber;
-
-    @Column
-    private String postalCode;
-
-    @Column
-    private String city;
-
-    @Column
-    private String country;
+    String howItWorks;
 }

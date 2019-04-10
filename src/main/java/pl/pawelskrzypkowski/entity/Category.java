@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * Created by Paweł Skrzypkowski
@@ -17,32 +19,18 @@ import javax.persistence.Id;
 @Entity
 @Data
 @Where(clause = "active!=false")
-public class Address extends BaseEntity {
+public class Category extends BaseEntity {
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column
-    private String customerName;
+    @ManyToOne
+    @JoinColumn(name = "parentCategoryId")
+    private Category parentCategory;
 
     @Column
-    private String customerSurname;
+    private String name;
 
     @Column
-    private String street;
-
-    @Column
-    private String streetNumber;
-
-    @Column
-    private String apartmentNumber;
-
-    @Column
-    private String postalCode;
-
-    @Column
-    private String city;
-
-    @Column
-    private String country;
+    private String description;
 }

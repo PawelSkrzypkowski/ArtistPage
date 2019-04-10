@@ -34,4 +34,7 @@ public class OrderPosition extends BaseEntity {
 
     @Column
     private Integer count;
+
+    @Column
+    private Double valueByOne;
 }

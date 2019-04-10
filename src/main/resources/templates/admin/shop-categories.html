@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="admin/layout :: layout">
+<body>
+<div th:fragment="content">
+    <input type="button" class="btn btn-default" value="Dodaj kategorię" onclick="Modal.getAddCategoryModal()">
+    <div id="categoriesTree"></div>
+</div>
+<script th:src="@{assets/js/bootstrap-treeview.js}"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var data = /*[[${categoriesTree}]]*/ {};
+    $('#categoriesTree').treeview(data);
+    /*]]>*/
+</script>
+</body>
+</html>

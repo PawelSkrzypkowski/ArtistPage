@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.Where;
 import pl.pawelskrzypkowski.entity.base.BaseEntity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -30,4 +31,20 @@ public class Order extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "addressId")
     private Address address;
+
+    @ManyToOne
+    @JoinColumn(name = "discountCodeId")
+    private DiscountCode discountCode;
+
+    @Column
+    private Double orderValue;
+
+    @Column
+    private Double deliveryValue;
+
+    @Column
+    private String deliveryType;
+
+    @Column
+    private String orderStatus;
 }

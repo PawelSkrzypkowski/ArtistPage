@@ -19,10 +19,11 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Alegreya+Sans:regular,italic,bold,bolditalic"/>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nixie+One:regular,italic,bold,bolditalic"/>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Alegreya+SC:regular,italic,bold,bolditalic"/>
+    <link rel="stylesheet" th:src="@{/assets/fonts/bubblerone-regular.ttf}"/>
 
     <!-- css -->
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/font-awesome.min.css}">
+    <!--<link rel="stylesheet" th:href="@{/assets/css/font-awesome.min.css}">-->
     <link rel="stylesheet" th:href="@{/assets/css/style.css}" media="screen"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css"/>
@@ -99,7 +100,7 @@
                     </select>
                     <a class="toggleDrawer" href="#"><i class="fa fa-bars fa-2x"></i></a>
                 </div>
-                <input class="form-control btn btn-primary" th:value="#{mailing.promobutton}" onclick="Modal.getMailingModal()">
+                <input style="margin-left:25%; margin-right:25%; margin-top:20px; opacity:0.5; width:50%;" class="form-control btn btn-primary" th:value="#{mailing.promobutton}" onclick="Modal.getMailingModal()">
             </section>
         </div>
     </div><!-- header -->

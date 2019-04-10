@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import pl.pawelskrzypkowski.controller.view.CategoriesTreeView;
 import pl.pawelskrzypkowski.entity.Blog;
+import pl.pawelskrzypkowski.entity.Category;
 import pl.pawelskrzypkowski.entity.MailingMember;
 import pl.pawelskrzypkowski.repository.BlogRepository;
+import pl.pawelskrzypkowski.repository.CategoryRepository;
 import pl.pawelskrzypkowski.repository.MailingMemberRepository;
 import pl.pawelskrzypkowski.service.EmailServiceImpl;
 import pl.pawelskrzypkowski.storage.StorageService;
@@ -45,6 +48,9 @@ public class AdminController {
 
     @Autowired
     EmailServiceImpl emailService;
+
+    @Autowired
+    CategoryRepository categoryRepository;
 
     @GetMapping(value = {"", "/"})
     public String mainPage(Model model){
@@ -181,5 +187,21 @@ public class AdminController {
     public String sendMailModal(Model model){
         model.addAttribute("id", -1);
         return "admin/modals::sendMailModal";
+    }
+
+    @GetMapping(value = "/shop-categories")
+    public String getShopCategoriesPage(Model model){
+        List<Category> categories = categoryRepository.findAll();
+        CategoriesTreeView categoriesTreeView = CategoriesTreeView.convertToTree(categories, null);
+        if(categoriesTreeView != null){
+            model.addAttribute("categoriesTree", categoriesTreeView);
+        }
+        return "admin/shop-categories";
+    }
+
+    @GetMapping(value = "/modal/getAddCategoryModal")
+    public String addCategoryModal(Model model){
+        model.addAttribute("id", -1);
+        return "admin/modals::addCategoryModal";
     }
 }

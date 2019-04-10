@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 /**
@@ -30,4 +31,18 @@ public class Product extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "uniqueProductId")
     private UniqueProduct uniqueProduct;
+
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    private Category category;
+
+    @Column
+    private String name;
+
+    @Column
+    @Lob
+    private String description;
+
+    @Column
+    private String value;
 }

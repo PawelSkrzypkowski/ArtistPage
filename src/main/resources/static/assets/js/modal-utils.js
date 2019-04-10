@@ -75,3 +75,14 @@ Modal.getSendMailToAllModal = function () {
         }
     });
 };
+
+Modal.getAddCategoryModal = function () {
+    var url = '/admin/modal/getAddCategoryModal';
+    $.ajax({
+        url: url,
+        success: function (data) {
+            $("#modal-holder").html(data);
+            $("#addCategoryModal").modal('show');
+        }
+    });
+};
