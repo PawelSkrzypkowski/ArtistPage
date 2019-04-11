@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/layout :: head"></head>
+<body>
+
+<div id="wrapper">
+
+	<nav th:replace="admin/layout :: sidebar"></nav>
+
+	<div id="page-wrapper">
+	    <div class="row">
+	        <div class="col-sm-12">
+	            <h3 class="page-header">Zarządzanie klientami</h3>
+	        </div>
+	        <!-- /.col-sm-12 -->
+	    </div>
+	    <!-- /.row -->
+	
+	    <div class="row">
+	        <div class="col-sm-10 col-sm-offset-1">
+	            <div class="panel panel-primary">
+	                <div class="panel-heading">
+						Lista klientów
+	                </div>
+	                <!-- /.panel-heading -->
+	                <div class="panel-body">
+	                	<div th:if="${success}" class="row alert alert-success alert-dismissible">
+					        <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+					        <span th:text="${success}"></span>
+					    </div>
+					    
+	                	<h4 th:if="${#lists.isEmpty(customers)}">Brak klientów</h4>
+	                	
+	                    <table th:unless="${#lists.isEmpty(customers)}" width="100%" class="table table-striped table-bordered" 
+	                    	id="dataTables-example">
+	                        <thead>
+	                            <tr>
+	                                <th width="10%">id</th>
+	                                <th width="35%">Pełna nazwa</th>
+	                                <th width="35%">Email</th>
+	                                <th width="20%">Opcje</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                            <tr th:each="customer : ${customers}">
+	                                <td th:text="${customer.id}"></td>
+	                                <td th:text="${customer.name}"></td>
+	                                <td th:text="${customer.email}"></td>
+	                                <td>
+	                                    <div class="dropdown">
+	                                        <button class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown">
+												Opcje
+	                                            <span class="caret"></span>
+	                                        </button>
+	                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	                                            <li>
+	                                            	<a th:href="@{/admin/customer/{id}/orders(id=${customer.id})}">
+														Historia zakupów
+	                                            	</a>
+	                                            </li>
+	                                            <li>
+	                                            	<a th:href="@{/admin/customer/{id}/delete(id=${customer.id})}"
+	                                            		th:attr="onclick='return confirm(\'Czy zgadzasz się usunąć tego klienta?\');'" >
+														Usuń klienta
+	                                            	</a>
+	                                            </li>
+	                                        </ul>
+	                                    </div>
+	                                </td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	                    <!-- /.table-responsive -->
+	                </div>
+	                <!-- /.panel-body -->
+	            </div>
+	            <!-- /.panel -->
+	        </div>
+	        <!-- /.col-sm-12 -->
+	    </div>
+	    <!-- /.row -->
+	</div>
+	<!-- /#page-wrapper -->
+
+</div>
+
+<script>
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+ $(document).ready(function() {
+     $('#dataTables-example').DataTable({
+         responsive: true
+     });
+ });
+</script>
+
+
+</body>
+</html>

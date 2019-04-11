@@ -1,3 +1,4 @@
+/*
 package pl.pawelskrzypkowski.entity;
 
 import lombok.Data;
@@ -11,10 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+*/
 /**
  * Created by Paweł Skrzypkowski
  * Wojskowa Akademia Techniczna im. Jarosława Dąbrowskiego, Warszawa 2018.
- */
+ *//*
+
 
 @Entity
 @Data
@@ -38,3 +41,4 @@ public class OrderPosition extends BaseEntity {
     @Column
     private Double valueByOne;
 }
+*/

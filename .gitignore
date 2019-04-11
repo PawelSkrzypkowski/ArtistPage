@@ -1,4 +1,7 @@
 /target/
+/artist/target
+/artist-shop/target
+
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
