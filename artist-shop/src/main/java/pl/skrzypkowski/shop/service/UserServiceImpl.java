@@ -7,14 +7,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import pl.skrzypkowski.shop.domain.web.Role;
 import pl.skrzypkowski.shop.domain.web.User;
+import pl.skrzypkowski.shop.domain.web.UserRole;
 import pl.skrzypkowski.shop.repository.UserRepository;
+import pl.skrzypkowski.shop.repository.UserRoleRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private UserRoleRepository userRoleRepository;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -63,13 +69,15 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	@Transactional
-	public boolean register(User user) {
+	public boolean register(User user, Role role) {
 		// Check email exists
 		if (userRepository.findByEmail(user.getEmail()) != null) {
 			return false; 
-		} 
-		
-		userRepository.save(user);
+		}
+
+		user = userRepository.save(user);
+		UserRole userRole = new UserRole(null, user, role, true);
+		userRoleRepository.save(userRole);
 		
 		return true;
 	}

@@ -59,14 +59,6 @@ public class User implements Serializable {
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private Set<Order> orders = new HashSet<>();
-	
-	@JoinTable(
-		name = "user_role", 
-		joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")}, 
-		inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
-	)
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    private Set<Role> roles = new HashSet<>();
 
 	@Column(name = "active")
 	private Boolean active;
@@ -87,15 +79,5 @@ public class User implements Serializable {
 	public void removeOrder(Order order) {
 		orders.remove(order);
 		order.setUser(null);
-	}
-
-	public void addRole(Role role) {
-		roles.add(role);
-		role.getUsers().add(this);
-	}
-	
-	public void removeRole(Role role) {
-		roles.remove(role);
-		role.getUsers().remove(this);
 	}
 }

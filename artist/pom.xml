@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>artist</artifactId>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>artist</name>
 	<description>Artist Page</description>
@@ -52,6 +52,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>${artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

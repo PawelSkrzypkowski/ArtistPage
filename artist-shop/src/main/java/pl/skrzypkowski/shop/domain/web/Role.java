@@ -30,20 +30,7 @@ public class Role implements Serializable {
 	
 	@Column(name = "name", nullable = false)
 	private String name;
-	
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
 
 	@Column(name = "active")
 	private Boolean active;
-
-	public void addUser(User user) {
-		users.add(user);
-		user.getRoles().add(this);
-	}
-	
-	public void removeUser(User user) {
-		users.remove(user);
-		user.getRoles().remove(this);
-	}
 }

@@ -98,10 +98,13 @@ public class BlogFileStorageService implements StorageService {
     @Override
     public void init() {
         try {
-            Files.createDirectories(rootLocation);
-        }
-        catch (IOException e) {
-            throw new StorageException("Could not initialize storage", e);
+            try {
+                Files.createDirectories(rootLocation);
+            } catch (IOException e) {
+                throw new StorageException("Could not initialize storage", e);
+            }
+        } catch (StorageException e){
+            e.printStackTrace();
         }
     }
 }

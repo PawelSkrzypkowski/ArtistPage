@@ -26,7 +26,7 @@ public class HomeController {
     @Qualifier("blogFileStorageService")
     StorageService blogStorageService;
 
-    @RequestMapping("/")
+    @RequestMapping(value = {"/", ""})
     public String home(Model model){
         List<Blog> latestBlogs = blogRepository.findTop3ByOrderByAddDateDesc();
         model.addAttribute("blog", latestBlogs);

@@ -2,6 +2,7 @@ package pl.skrzypkowski.shop.service;
 
 import java.util.List;
 
+import pl.skrzypkowski.shop.domain.web.Role;
 import pl.skrzypkowski.shop.domain.web.User;
 
 public interface UserService {
@@ -16,6 +17,6 @@ public interface UserService {
 	
 	pl.skrzypkowski.shop.domain.api.User checkLogin(pl.skrzypkowski.shop.domain.api.User user);
 	
-	boolean register(User user);
+	boolean register(User user, Role role);
 	
 }
