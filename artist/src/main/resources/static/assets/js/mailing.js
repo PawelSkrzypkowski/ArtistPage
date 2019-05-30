@@ -1,7 +1,7 @@
 $('#addMailingMemberForm').on('submit', function (e) {
     e.preventDefault();
     $.ajax({
-        url: "/mail/member/add",
+        url: context + "mail/member/add",
         type: 'POST',
         async: true,
         data: {

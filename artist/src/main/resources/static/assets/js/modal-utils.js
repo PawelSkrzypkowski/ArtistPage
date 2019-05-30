@@ -1,6 +1,6 @@
 var Modal = function () {};
 Modal.getAddBlogModal = function () {
-    var url = '/admin/modal/addBlogPage';
+    var url = context + 'admin/modal/addBlogPage';
     $.ajax({
         url: url,
         success: function (data) {
@@ -11,7 +11,7 @@ Modal.getAddBlogModal = function () {
 };
 
 Modal.getEditBlogModal = function (id) {
-    var url = '/admin/modal/editBlogPage/' + id;
+    var url = context + 'admin/modal/editBlogPage/' + id;
     $.ajax({
         url: url,
         success: function (data) {
@@ -22,7 +22,7 @@ Modal.getEditBlogModal = function (id) {
 };
 
 Modal.getDeleteBlogModal = function (id) {
-    var url = '/admin/modal/deleteBlogPage/' + id;
+    var url = context + 'admin/modal/deleteBlogPage/' + id;
     $.ajax({
         url: url,
         success: function (data) {
@@ -33,7 +33,7 @@ Modal.getDeleteBlogModal = function (id) {
 };
 
 Modal.getMailingModal = function () {
-    var url = '/modal/mailing';
+    var url = context + 'modal/mailing';
     $.ajax({
         url: url,
         success: function (data) {
@@ -44,7 +44,7 @@ Modal.getMailingModal = function () {
 };
 
 Modal.getSendMailModal = function (id) {
-    var url = '/admin/modal/sendMail/' + id;
+    var url = context + 'admin/modal/sendMail/' + id;
     $.ajax({
         url: url,
         success: function (data) {
@@ -55,7 +55,7 @@ Modal.getSendMailModal = function (id) {
 };
 
 Modal.getDeleteMailMemberModal = function (id) {
-    var url = '/admin/modal/deleteMailMember/' + id;
+    var url = context + 'admin/modal/deleteMailMember/' + id;
     $.ajax({
         url: url,
         success: function (data) {
@@ -66,7 +66,7 @@ Modal.getDeleteMailMemberModal = function (id) {
 };
 
 Modal.getSendMailToAllModal = function () {
-    var url = '/admin/modal/sendMultipleMail';
+    var url = context + 'admin/modal/sendMultipleMail';
     $.ajax({
         url: url,
         success: function (data) {
@@ -77,7 +77,7 @@ Modal.getSendMailToAllModal = function () {
 };
 
 Modal.getAddCategoryModal = function () {
-    var url = '/admin/modal/getAddCategoryModal';
+    var url = context + 'admin/modal/getAddCategoryModal';
     $.ajax({
         url: url,
         success: function (data) {
