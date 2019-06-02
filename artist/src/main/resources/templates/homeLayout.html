@@ -23,7 +23,7 @@
 
     <!-- css -->
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
-    <!--<link rel="stylesheet" th:href="@{/assets/css/font-awesome.min.css}">-->
+    <link rel="stylesheet" th:href="@{/assets/css/font-awesome.min.css}">
     <link rel="stylesheet" th:href="@{/assets/css/style.css}" media="screen"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css"/>
@@ -45,7 +45,7 @@
     var context = [[@{/}]];
     /*]]>*/
 </script>
-<div id="drawer-right">
+<!--<div id="drawer-right">
     <div class="cross text-right">
         <a class="toggleDrawer" href="#"><i class="fa fa-times-circle fa-2x"></i></a>
     </div>
@@ -81,7 +81,7 @@
             <li><a href=""><i class="fa fa-google-plus-square fa-3x"></i></a></li>
         </ul>
     </div>
-</div><!-- #drawer-right -->
+</div>&lt;!&ndash; #drawer-right &ndash;&gt;-->
 
 <div id="wrapper">
     <video autoplay muted loop>
@@ -92,19 +92,51 @@
         <div class="header-wrapper-inner">
             <section class="top clearfix">
                 <div class="pull-left">
-                    <h1><a class="logo" href="index.html" th:text="#{title}"></a>
-                        <div class="pull-right"></div>
+                    <h1>
                         <a href="https://facebook.com"><img th:src="@{/assets/images/logo/facebook.png}" alt="logo facebook"/></a>
                         <a href="https://facebook.com"><img th:src="@{/assets/images/logo/instagram.png}" alt="logo instagram"/></a>
                     </h1>
                 </div>
+                <div class="text-center">Logo</div>
                 <div class="pull-right">
-                    <select class="selectpicker" data-width="fit">
-                        <option data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
-                        <option data-content='<span class="flag-icon flag-icon-pl"></span> Polski' selected>Polski</option>
-                    </select>
-                    <a class="toggleDrawer" href="#"><i class="fa fa-bars fa-2x"></i></a>
+                    <div class="row">
+
+                        <div class="col-md-4 col-md-offset-0 col-xs-offset-3 col-xs-6">
+                            <select class="selectpicker" data-width="fit">
+                                <option>PLN</option>
+                                <option>USD</option>
+                                <option>EURO</option>
+                                <option>£</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 col-xs-6">
+                            <select class="selectpicker" data-width="fit">
+                                <option>PLN</option>
+                                <option>USD</option>
+                                <option>EURO</option>
+                                <option>£</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 col-xs-6">
+                            <select class="selectpicker" data-width="fit">
+                                <option data-content='<span class="flag-icon flag-icon-us"></span>'></option>
+                                <option data-content='<span class="flag-icon flag-icon-pl"></span>' selected></option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="col-md-6 col-md-offset-3" style="height: 2px; background-color: #000000"></div>
+                    <ul class="nav navbar-nav" style="float:none; margin: 0 auto; display: table; table-layout: fixed;">
+                        <li><a href="#">SKLEP</a></li>
+                        <li><a href="#">ORYGINAŁY</a></li>
+                        <li><a href="#">WYDRUKI FINE ART</a></li>
+                        <li><a href="#">OBRAZ NA ZAMOWIENIE</a></li>
+                        <li><a href="#">O TWÓRCZOŚCI</a></li>
+                        <li><a href="#">WYSYŁKA</a></li>
+                        <li><a href="#">KONTAKT</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
                 <input style="margin-left:25%; margin-right:25%; margin-top:20px; opacity:0.5; width:50%;" class="form-control btn btn-primary" th:value="#{mailing.promobutton}" onclick="Modal.getMailingModal()">
             </section>
         </div>
