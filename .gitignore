@@ -1,6 +1,10 @@
 /target/
 /artist/target
 /artist-shop/target
+/artist.log*
+/artist/artist.log*
+artist.log
+artist/artist.log
 
 !.mvn/wrapper/maven-wrapper.jar
 
