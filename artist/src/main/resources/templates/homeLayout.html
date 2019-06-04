@@ -81,16 +81,12 @@
             <li><a href=""><i class="fa fa-google-plus-square fa-3x"></i></a></li>
         </ul>
     </div>
-</div>&lt;!&ndash; #drawer-right &ndash;&gt;
+</div>
 
 <div id="wrapper">
-    <video autoplay muted loop>
-        <source src="http://thenewcode.com/assets/videos/polina.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
     <div id="header" class="content-block">
         <div class="header-wrapper-inner">
-            <section class="top clearfix">
+            <section class="clearfix top navbar-fixed-top">
                 <div class="row">
                     <div class="col-md-9 col-xs-6 col-sm-8">
                         <div class="row">
@@ -146,11 +142,17 @@
                         <li><a href="#">WYSYŁKA</a></li>
                         <li><a href="#">KONTAKT</a></li>
                     </ul>
-                </div><!-- /.navbar-collapse -->
+                </div>
                 <input style="margin-left:25%; margin-right:25%; margin-top:20px; opacity:0.5; width:50%;" class="form-control btn btn-primary" th:value="#{mailing.promobutton}" onclick="Modal.getMailingModal()">
             </section>
         </div>
-    </div><!-- header -->
+    </div>
+
+    <div class="content-block" id="images">
+        <div class="container">
+            <img class="img-responsive" th:src="@{/assets/images/example_main_photo.jpg}"/>
+        </div>
+    </div>
 
     <div th:include="this :: content"/>
 

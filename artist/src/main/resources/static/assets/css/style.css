@@ -53,6 +53,18 @@ body {
 	background: #f1f0f0;
 }
 
+@media screen and (min-width: 992px) {
+	body {
+		padding-top: 208px
+	}
+}
+
+@media screen and (max-width: 991px) {
+	body {
+		padding-top: 246px
+	}
+}
+
 p {margin: 0 0 20px 0;	}
 
 img {max-width: 100%;}
@@ -151,7 +163,6 @@ video {
 }
 
 #header .top {
-	position:fixed;
 	background-color: #fdeee9;
 	top:0;
 	width: 100%;
@@ -166,7 +177,7 @@ video {
 }
 
 #header .top.solid {
-    background: #475B6F;
+    background: #FDE9DF;
     padding-top: 15px;
     padding-bottom: 15px;
 }
