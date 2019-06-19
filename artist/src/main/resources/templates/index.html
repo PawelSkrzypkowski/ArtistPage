@@ -4,42 +4,6 @@
 	  th:include="homeLayout :: layout">
 <body>
 <div th:fragment="content">
-
-	<div class="content-block parallax" id="about-me"><!-- ABOUT ME -->
-		<div class="container text-center">
-			<header class="block-heading cleafix">
-				<h1 th:text="#{pictures.title}"></h1>
-				<p th:text="#{pictures.desc}"></p>
-			</header>
-			<section class="block-body">
-				<div class="row">
-					<div class="col-md-4">
-						<div class="service">
-							<img th:src="@{/assets/images/palm.png}" alt="arrow" class="block-image"/>
-							<h2>Illustration</h2>
-							<p>In at accumsan risus. Nam id volutpat ante. Etiam vel mi mattis, vulputate nunc nec, sodales nibh. Etiam nulla magna, gravida eget ultricies sit amet, hendrerit in lorem.</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="service">
-							<img th:src="@{/assets/images/palm.png}" alt="arrow" class="block-image"/>
-							<h2>Illustration</h2>
-							<p>In at accumsan risus. Nam id volutpat ante. Etiam vel mi mattis, vulputate nunc nec, sodales nibh. Etiam nulla magna, gravida eget ultricies sit amet, hendrerit in lorem.</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="service">
-							<img th:src="@{/assets/images/palm.png}" alt="arrow" class="block-image"/>
-							<h2>Illustration</h2>
-							<p>In at accumsan risus. Nam id volutpat ante. Etiam vel mi mattis, vulputate nunc nec, sodales nibh. Etiam nulla magna, gravida eget ultricies sit amet, hendrerit in lorem.</p>
-						</div>
-					</div>
-				</div>
-			</section>
-		</div>
-	</div><!-- ABOUT ME -->
-
-
 	<div class="content-block" id="portfolio">
 		<div class="container">
 			<header class="block-heading cleafix">
@@ -48,39 +12,59 @@
 				<p th:text="#{latestWork.desc}"></p>
 			</header>
 			<section class="block-body">
-				<div class="row">
-					<div class="col-sm-4 block-element">
-						<a href="#" class="recent-work" style="background-image:url(assets/images/rain_1-320x240.jpg)">
-							<span class="btn btn-o-white">Lorem Rocks</span>
-						</a>
+				<div class="well">
+					<div id="myCarousel" class="carousel slide">
+
+						<!-- Carousel items -->
+						<div class="carousel-inner">
+							<div class="item active">
+								<div class="row">
+									<div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
+									</div>
+									<div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
+									</div>
+									<div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
+									</div>
+									<div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
+									</div>
+								</div>
+								<!--/row-->
+							</div>
+							<!--/item-->
+							<div class="item">
+								<div class="row">
+									<div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+									</div>
+									<div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+									</div>
+									<div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+									</div>
+									<div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+									</div>
+								</div>
+								<!--/row-->
+							</div>
+							<!--/item-->
+							<div class="item">
+								<div class="row">
+									<div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+									</div>
+									<div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+									</div>
+									<div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+									</div>
+									<div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+									</div>
+								</div>
+								<!--/row-->
+							</div>
+							<!--/item-->
+						</div>
+						<!--/carousel-inner--> <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+
+						<a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
 					</div>
-					<div class="col-sm-4 block-element">
-						<a href="#" class="recent-work" style="background-image:url(assets/images/min_icons_thumb1-320x240.jpg)">
-							<span class="btn btn-o-white">Lorem Rocks</span>
-						</a>
-					</div>
-					<div class="col-sm-4 block-element">
-						<a href="#" class="recent-work" style="background-image:url(assets/images/flat_icons_thumb.jpg)">
-							<span class="btn btn-o-white">Lorem Rocks</span>
-						</a>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 block-element">
-						<a href="#" class="recent-work" style="background-image:url(assets/images/wood-320x240.jpg)">
-							<span class="btn btn-o-white">Lorem Rocks</span>
-						</a>
-					</div>
-					<div class="col-sm-4 block-element">
-						<a href="#" class="recent-work" style="background-image:url(assets/images/bike-320x240.jpg)">
-							<span class="btn btn-o-white">Lorem Rocks</span>
-						</a>
-					</div>
-					<div class="col-sm-4 block-element">
-						<a href="#" class="recent-work" style="background-image:url(assets/images/six_1-320x240.jpg)">
-							<span class="btn btn-o-white">Lorem Rocks</span>
-						</a>
-					</div>
+					<!--/myCarousel-->
 				</div>
 			</section>
 		</div>
