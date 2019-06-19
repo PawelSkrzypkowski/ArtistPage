@@ -303,9 +303,8 @@ video {
 	color: white;
 }
 #contact {
-	background-image: url(../images/newsletter-bg.png);
-	color: white;
-	background-color: #405162;
+	/*color: white;*/
+	background-color: #FDE9DF;
 }
 #parallax h1{
 	margin-bottom: 60px;
@@ -431,11 +430,6 @@ video {
 //  09 - Contact
 ///////////////////////////////////////////////////////////////////////*/
 
-
-#contact{
-	color: white;
-}
-#contact h1{color: white}
 
 .form-control-white {
     background: transparent;
