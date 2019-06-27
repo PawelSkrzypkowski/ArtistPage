@@ -1,6 +1,7 @@
 package pl.pawelskrzypkowski.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Where;
 import pl.pawelskrzypkowski.entity.base.BaseEntity;
 
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 
 @Entity
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Where(clause = "active!=false")
 public class MailingMember extends BaseEntity {
     @Id

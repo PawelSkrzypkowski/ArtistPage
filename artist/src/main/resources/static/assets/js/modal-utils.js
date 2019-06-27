@@ -77,12 +77,71 @@ Modal.getSendMailToAllModal = function () {
 };
 
 Modal.getAddCategoryModal = function () {
+    //TODO: tylko ta metoda i link na stronie
     var url = context + 'admin/modal/getAddCategoryModal';
     $.ajax({
         url: url,
         success: function (data) {
             $("#modal-holder").html(data);
             $("#addCategoryModal").modal('show');
+        }
+    });
+};
+
+Modal.getDeleteCategoryModal = function (id) {
+    var url = context + 'admin/modal/deleteCategory/' + id;
+    $.ajax({
+        url: url,
+        success: function (data) {
+            $("#modal-holder").html(data);
+            $("#deleteCategoryModal").modal('show');
+        }
+    });
+};
+
+Modal.getAddCategoryElementModal = function () {
+    //TODO: tylko ta metoda i link na stronie
+    var url = context + 'admin/modal/getAddCategoryModal';
+    $.ajax({
+        url: url,
+        success: function (data) {
+            $("#modal-holder").html(data);
+            $("#addCategoryModal").modal('show');
+        }
+    });
+};
+
+Modal.getDeleteCategoryElementModal = function (id) {
+    var url = context + 'admin/modal/deleteCategoryElement/' + id;
+    $.ajax({
+        url: url,
+        success: function (data) {
+            $("#modal-holder").html(data);
+            $("#deleteCategoryElementModal").modal('show');
+        }
+    });
+};
+
+Modal.getEditCategoryModal = function (id) {
+    //TODO: tylko ta metoda i link na stronie
+    var url = context + 'admin/modal/editCategoryModal/' + id;
+    $.ajax({
+        url: url,
+        success: function (data) {
+            $("#modal-holder").html(data);
+            $("#editCategoryModal").modal('show');
+        }
+    });
+};
+
+Modal.getEditCategoryElementModal = function (id) {
+    //TODO: tylko ta metoda i link na stronie
+    var url = context + 'admin/modal/editCategoryElementModal/' + id;
+    $.ajax({
+        url: url,
+        success: function (data) {
+            $("#modal-holder").html(data);
+            $("#editCategoryElementModal").modal('show');
         }
     });
 };

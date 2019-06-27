@@ -5,18 +5,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import pl.pawelskrzypkowski.controller.view.CategoriesTreeView;
 import pl.pawelskrzypkowski.entity.Blog;
 import pl.pawelskrzypkowski.entity.Category;
+import pl.pawelskrzypkowski.entity.CategoryElement;
 import pl.pawelskrzypkowski.entity.MailingMember;
 import pl.pawelskrzypkowski.repository.BlogRepository;
+import pl.pawelskrzypkowski.repository.CategoryElementRepository;
 import pl.pawelskrzypkowski.repository.CategoryRepository;
 import pl.pawelskrzypkowski.repository.MailingMemberRepository;
 import pl.pawelskrzypkowski.service.EmailServiceImpl;
@@ -25,13 +21,10 @@ import pl.pawelskrzypkowski.util.ClassWrapper;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -51,6 +44,9 @@ public class AdminController {
 
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Autowired
+    CategoryElementRepository categoryElementRepository;
 
     @GetMapping(value = {"", "/"})
     public String mainPage(Model model){
@@ -189,19 +185,50 @@ public class AdminController {
         return "admin/modals::sendMailModal";
     }
 
-    @GetMapping(value = "/shop-categories")
-    public String getShopCategoriesPage(Model model){
+    @GetMapping("/categories")
+    public String getCategoriesPage(Model model){
         List<Category> categories = categoryRepository.findAll();
-        CategoriesTreeView categoriesTreeView = CategoriesTreeView.convertToTree(categories, null);
-        if(categoriesTreeView != null){
-            model.addAttribute("categoriesTree", categoriesTreeView);
-        }
-        return "admin/shop-categories";
+        model.addAttribute("categories", categories);
+        return "admin/categories";
     }
 
-    @GetMapping(value = "/modal/getAddCategoryModal")
-    public String addCategoryModal(Model model){
-        model.addAttribute("id", -1);
-        return "admin/modals::addCategoryModal";
+    @GetMapping("/categories/{id}")
+    public String getCategoryPage(@PathVariable("id") Long id, Model model){
+        List<CategoryElement> categoryElements = categoryElementRepository.findAllByCategoryId(id);
+        Category category = categoryRepository.getOne(id);
+        model.addAttribute("categoryElements", categoryElements);
+        model.addAttribute("categoryId", id);
+        model.addAttribute("categoryName", category.getName());
+        return "admin/categoryPage";
+    }
+
+    @GetMapping(value = "/modal/deleteCategory/{id}")
+    public String deleteCategoryModal(@PathVariable("id") Long id, Model model){
+        model.addAttribute("id", id);
+        return "admin/modals::deleteCategoryModal";
+    }
+
+    @PostMapping("/category/delete/{id}")
+    @ResponseBody
+    public String deleteCategory(@PathVariable("id") Long id){
+        List<CategoryElement> categoryElements = categoryElementRepository.findAllByCategoryId(id);
+        categoryElements.forEach(ce->categoryElementRepository.setActiveFalse(ce.getId()));
+        categoryRepository.setActiveFalse(id);
+        return "success";
+    }
+
+
+
+    @GetMapping(value = "/modal/deleteCategoryElement/{id}")
+    public String deleteCategoryElementModal(@PathVariable("id") Long id, Model model){
+        model.addAttribute("id", id);
+        return "admin/modals::deleteCategoryElementModal";
+    }
+
+    @PostMapping("/categoryElement/delete/{id}")
+    @ResponseBody
+    public String deleteCategoryElement(@PathVariable("id") Long id){
+        categoryElementRepository.setActiveFalse(id);
+        return "success";
     }
 }

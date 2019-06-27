@@ -5,32 +5,31 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Where;
 import pl.pawelskrzypkowski.entity.base.BaseEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import java.util.Date;
+import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Where(clause = "active!=false")
-public class Blog extends BaseEntity {
+public class CategoryElement extends BaseEntity {
+
     @Id
     @GeneratedValue
     private Long id;
 
     @Column
-    private Date addDate;
+    private String href;
+
+    @Column(precision = 8, scale = 2)
+    private BigDecimal price;
 
     @Column
-    private String title;
+    private String name;
 
     @Column
-    @Lob
-    private String content;
+    private String description;
 
-    @Column
-    private String author;
+    @ManyToOne
+    private Category category;
 }

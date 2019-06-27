@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="admin/layout :: layout">
+<body>
+<div th:fragment="content">
+    <input type="button" class="btn btn-default" value="Dodaj" onclick="Modal.getAddCategoryModal()"/>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Link</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${categories != null}" th:each="category : ${categories}">
+            <td th:text="${category.name}"></td>
+            <td th:text="${category.href}"></td>
+            <td><input type="button" class="btn btn-primary categoryElements" th:data-id="${category.id}" value="Zarządzaj elementami"/></td>
+            <td><input type="button" class="btn btn-primary categoryEdit" th:data-id="${category.id}" value="Edytuj"/></td>
+            <td><input type="button" class="btn btn-danger categoryDelete" th:data-id="${category.id}" value="Usuń"/></td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="modal-holder"></div>
+    <script th:src="@{/assets/js/jquery-2.1.3.min.js}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var context = [[@{/}]];
+            /*]]>*/
+        $('.categoryElements').on('click', function () {
+            window.location.href = context + '';
+        });
+        $('.categoryDelete').on('click', function () {
+            Modal.getDeleteCategoryModal($(this).attr('data-id'));
+        });
+        $('.categoryEdit').on('click', function () {
+            Modal.getEditCategoryModal($(this).attr('data-id'));
+        });
+    </script>
+</div>
+
+</body>
+</html>

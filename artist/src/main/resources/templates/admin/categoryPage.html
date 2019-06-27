@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="admin/layout :: layout">
+<body>
+<div th:fragment="content">
+    <input type="button" class="btn btn-default" value="Dodaj" onclick="Modal.getAddCategoryElementModal()"/>
+    <h2 id="category" th:data-id="${categoryId}" th:text="${categoryName}"></h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Link</th>
+            <th>Cena</th>
+            <th>Opis</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${categoryElements != null}" th:each="element : ${categoryElements}">
+            <td th:text="${element.name}"></td>
+            <td th:text="${element.href}"></td>
+            <td th:text="${element.price}"></td>
+            <td th:text="${element.description}"></td>
+            <td><input type="button" class="btn btn-primary categoryElementEdit" th:data-id="${element.id}" value="Edytuj"/></td>
+            <td><input type="button" class="btn btn-danger categoryElementDelete" th:data-id="${element.id}" value="Usuń"/></td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="modal-holder"></div>
+    <script th:src="@{/assets/js/jquery-2.1.3.min.js}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var context = [[@{/}]];
+            /*]]>*/
+            $('.categoryElementEdit').on('click', function () {
+                Modal.getEditCategoryElementModal($(this).attr('data-id'));
+            });
+            $('.categoryElementDelete').on('click', function () {
+                Modal.getDeleteCategoryElementModal($(this).attr('data-id'));
+            });
+    </script>
+</div>
+
+</body>
+</html>

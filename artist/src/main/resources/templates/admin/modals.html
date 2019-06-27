@@ -235,30 +235,63 @@
         </script>
     </div>
 
-    <div th:fragment="addCategoryModal" class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryModalLabel">
+    <div th:fragment="deleteCategoryModal" class="modal fade" id="deleteCategoryModal" tabindex="-1" role="dialog" aria-labelledby="deleteCategoryModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="addCategoryModalLabel">Dodaj kategorię</h4>
+                    <h4 class="modal-title" id="deleteCategoryModalLabel">Usuń wpis</h4>
                 </div>
                 <div class="modal-body">
-
+                    Czy na pewno chcesz usunąć wpis?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
-                    <button type="button" class="btn btn-primary" id="submitAddCategoryModal">Dodaj</button>
+                    <button type="button" class="btn btn-primary" id="submitDeleteCategory" th:data-id="${id}">Usuń</button>
                 </div>
             </div>
         </div>
         <script>
-            $('#submitAddCategoryModal').on('click', function (e) {
+            $('#submitDeleteCategory').on('click', function (e) {
                 $.ajax({
-                    url: context + "admin/mail/delete/" + $('#submitDeleteMailMember').attr('data-id'),
+                    url: context + "admin/category/delete/" + $('#submitDeleteCategory').attr('data-id'),
                     type: 'POST',
                     async: true,
                     success: function (data) {
-                        $('#deleteMailMemberModal').modal('hide');
+                        $('#deleteCategoryModal').modal('hide');
+                    },
+                    error: function () {
+                        console.log('fail');
+                    }
+                });
+            });
+        </script>
+    </div>
+
+    <div th:fragment="deleteCategoryElementModal" class="modal fade" id="deleteCategoryElementModal" tabindex="-1" role="dialog" aria-labelledby="deleteCategoryElementModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="deleteCategoryElementModalLabel">Usuń wpis</h4>
+                </div>
+                <div class="modal-body">
+                    Czy na pewno chcesz usunąć wpis?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                    <button type="button" class="btn btn-primary" id="submitDeleteCategoryElement" th:data-id="${id}">Usuń</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            $('#submitDeleteCategoryElement').on('click', function (e) {
+                $.ajax({
+                    url: context + "admin/categoryElement/delete/" + $('#submitDeleteCategoryElement').attr('data-id'),
+                    type: 'POST',
+                    async: true,
+                    success: function (data) {
+                        $('#deleteCategoryElementModal').modal('hide');
                     },
                     error: function () {
                         console.log('fail');
